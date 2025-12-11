@@ -1,0 +1,176 @@
+﻿<Window x:Class="Hellbingojatel.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hell Bingo Jatel" Height="768" Width="1366" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="BingoBtn" TargetType="Button">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="FontFamily" Value="Segoe Script"/>
+        </Style>
+    </Window.Resources>
+
+    <Window.Background>
+        <ImageBrush ImageSource="edu-bokow-prison-day.jpg" Opacity="0.28" Stretch="UniformToFill"/>
+    </Window.Background>
+
+    <Grid x:Name="MainGrid" Margin="10">
+
+        <Grid x:Name="menu" Visibility="Visible">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label Content="Hell Bingo" FontSize="100" Foreground="Red" 
+                       FontFamily="Segoe Script" FontWeight="UltraBold" HorizontalAlignment="Center"/>
+                <Button x:Name="startButton" Content="Start Game" FontSize="50" Width="400" Height="100" 
+                        Margin="0,50,0,0" Click="StartButton_Click" 
+                        BorderBrush="Black" Background="#CC000000" Foreground="White" 
+                        FontFamily="Segoe Script" FontWeight="Bold"/>
+                <Button Content="Cheat: Infinite Ink" Margin="0,20,0,0" Width="200" Click="Button_Click_4" Background="Gray"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="game" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label x:Name="statuscsheckeringame" Content="Welcome to Hell" 
+                       HorizontalAlignment="Center" Foreground="#FFB20000" FontSize="36" FontFamily="Segoe Script"/>
+
+                <Label Content="Your Numbers:" FontSize="24" Foreground="White" 
+                       FontFamily="Segoe Script" HorizontalAlignment="Center" Margin="0,10,0,5"/>
+
+                <Border BorderBrush="#FF526FFF" BorderThickness="2" CornerRadius="10" Background="#99000000" Padding="15">
+                    <UniformGrid x:Name="PlayerCardGrid" Rows="3" Columns="5" Width="500" Height="300">
+                        <Button x:Name="m1" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m2" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m3" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m4" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m5" Style="{StaticResource BingoBtn}"/>
+
+                        <Button x:Name="m6" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m7" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m8" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m9" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m10" Style="{StaticResource BingoBtn}"/>
+
+                        <Button x:Name="m11" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m12" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m13" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m14" Style="{StaticResource BingoBtn}"/>
+                        <Button x:Name="m15" Style="{StaticResource BingoBtn}"/>
+                    </UniformGrid>
+                </Border>
+
+                <TextBlock Text="Pulled Numbers:" FontSize="18" Foreground="White" Margin="0,20,0,5" HorizontalAlignment="Center"/>
+                <Border Background="#66000000" CornerRadius="5" Padding="5" Width="500" Height="100">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <TextBlock x:Name="pulledList" TextWrapping="Wrap" FontSize="16" Foreground="LightGray"/>
+                    </ScrollViewer>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="20" VerticalAlignment="Center">
+
+                <Label x:Name="nightscount" Content="Night 1" Foreground="Red" FontSize="40" 
+                       HorizontalAlignment="Right" FontFamily="Segoe Script"/>
+
+                <GroupBox Header="Survival Stats" Foreground="White" BorderBrush="Red" Margin="0,0,0,20" FontSize="16">
+                    <StackPanel Margin="10">
+                        <Label x:Name="inkcount" Content="Inks: 0" Foreground="White" FontSize="18" FontWeight="Bold"/>
+                        <Label x:Name="playersAliveCount" Content="Players Alive: 50" Foreground="White"/>
+                        <Separator Background="Red" Margin="0,5"/>
+                        <Label Content="Inventory:" Foreground="Gray"/>
+                        <Label x:Name="snipecount" Content="Snipe (Wildcard): 0" Foreground="Cyan"/>
+                        <Label x:Name="sabotagecount" Content="Sabotage: 0" Foreground="Orange"/>
+                        <Label x:Name="shieldcount" Content="Shield: 0" Foreground="Lime"/>
+                        <Label x:Name="shieldActiveLabel" Content="SHIELD ACTIVE" Foreground="Lime" FontWeight="Bold" Visibility="Hidden"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <Button x:Name="nextround" Content="DRAW NUMBER" Height="80" FontSize="30" 
+                        Background="#CC330000" Foreground="White" FontWeight="Bold" 
+                        Click="nextround_Click" Margin="0,0,0,20"/>
+
+                <Label Content="Use Powerups:" Foreground="White" FontSize="16"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Content="Snipe" Grid.Column="0" Height="50" Margin="2" Background="Cyan" Click="UseSnipe_Click"/>
+                    <Button Content="Sabotage" Grid.Column="1" Height="50" Margin="2" Background="Orange" Click="UseSabotage_Click"/>
+                    <Button Content="Shield" Grid.Column="2" Height="50" Margin="2" Background="Green" Click="UseShield_Click"/>
+                </Grid>
+
+                <Label x:Name="currentstatus" Content="" FontSize="16" Foreground="Yellow" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+
+                <Button x:Name="home" Content="Give Up (Menu)" Margin="0,40,0,0" Click="Button_Click_5" Background="Gray"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="buyphase" Visibility="Hidden">
+            <Border Background="#EE000000" Margin="50" CornerRadius="20" BorderBrush="Red" BorderThickness="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="20">
+                        <Label Content="SURVIVED THE NIGHT" Foreground="Green" FontSize="40" HorizontalAlignment="Center" FontWeight="Bold"/>
+                        <Label x:Name="inkcount_buy" Content="Total Inks: 0" Foreground="White" FontSize="30" HorizontalAlignment="Center"/>
+                        <Label Content="Prepare for the next horror..." Foreground="Red" FontSize="20" HorizontalAlignment="Center" FontFamily="Segoe Script"/>
+                    </StackPanel>
+
+                    <UniformGrid Grid.Row="1" Columns="3" Margin="20">
+                        <StackPanel Margin="10" Background="#33FFFFFF">
+                            <Label Content="SNIPE" Foreground="Cyan" FontSize="24" HorizontalAlignment="Center" FontWeight="Bold"/>
+                            <TextBlock Text="Mark any number on your card immediately." TextWrapping="Wrap" Foreground="White" Margin="10" TextAlignment="Center" Height="60"/>
+                            <Label Content="Cost: 15 Ink" Foreground="Yellow" HorizontalAlignment="Center"/>
+                            <Button Content="BUY" Height="40" Margin="20" Background="Cyan" Click="BuySnipe_Click"/>
+                            <Label x:Name="snipe_stock_buy" Content="Owned: 0" Foreground="White" HorizontalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="10" Background="#33FFFFFF">
+                            <Label Content="SABOTAGE" Foreground="Orange" FontSize="24" HorizontalAlignment="Center" FontWeight="Bold"/>
+                            <TextBlock Text="Remove a mark from the leading enemy player." TextWrapping="Wrap" Foreground="White" Margin="10" TextAlignment="Center" Height="60"/>
+                            <Label Content="Cost: 10 Ink" Foreground="Yellow" HorizontalAlignment="Center"/>
+                            <Button Content="BUY" Height="40" Margin="20" Background="Orange" Click="BuySabotage_Click"/>
+                            <Label x:Name="sabotage_stock_buy" Content="Owned: 0" Foreground="White" HorizontalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="10" Background="#33FFFFFF">
+                            <Label Content="SHIELD" Foreground="Lime" FontSize="24" HorizontalAlignment="Center" FontWeight="Bold"/>
+                            <TextBlock Text="Protect yourself from execution for one night." TextWrapping="Wrap" Foreground="White" Margin="10" TextAlignment="Center" Height="60"/>
+                            <Label Content="Cost: 20 Ink" Foreground="Yellow" HorizontalAlignment="Center"/>
+                            <Button Content="BUY" Height="40" Margin="20" Background="Green" Click="BuyShield_Click"/>
+                            <Label x:Name="shield_stock_buy" Content="Owned: 0" Foreground="White" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <Button Grid.Row="2" Content="START NEXT NIGHT" Height="80" Width="400" Margin="0,0,0,30" 
+                            FontSize="30" Background="Red" Foreground="White" FontWeight="Bold" Click="Button_Click"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid x:Name="Won" Visibility="Hidden" Background="#CC000000">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Label x:Name="wonTitle" Content="YOU WON!" Foreground="Green" FontSize="60" HorizontalAlignment="Center"/>
+                <Label x:Name="wonSubtitle" Content="The session is over." Foreground="White" FontSize="30" HorizontalAlignment="Center"/>
+                <Label x:Name="pluszinkwonsc" Content="+10 Inks Reward" Foreground="Yellow" FontSize="25" HorizontalAlignment="Center" Margin="0,20,0,20"/>
+
+                <Button x:Name="continueBtn" Content="Go to Shop" Background="Gray" FontSize="30" Width="300" Height="80" Click="Button_Click_7"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>
